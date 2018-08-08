@@ -1,0 +1,24 @@
+{
+    "remotePath": "/www/pakuna/calendar/",
+    "host": "euve100010.serverprofi24.de",
+    "username": "pakuna",
+    "password": "pakupower",
+    "port": 21,
+    "secure": false,
+    "protocol": "ftp",
+    "uploadOnSave": true,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\_scss"
+    ],
+    "generatedFiles": {
+        "uploadOnSave": true,
+        "extensionsToInclude": [".css"],
+        "path": "/css"
+    }
+}
