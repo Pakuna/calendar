@@ -1,0 +1,114 @@
+html {
+    overflow: auto;
+}
+body {
+    background-color: #36587F;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 70px 70px;
+    grid-template-rows: 90px auto;
+    grid-template-areas:
+      "current prev next"
+      "calendar calendar calendar";
+}
+a {
+    color: #DDD;
+    text-decoration: none;
+}
+
+.va-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.control {
+    text-align: center;
+
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        font-weight: bold;
+        font-size: 2rem;
+
+        &:hover {
+            font-size: 2.5rem;
+        }
+    }
+}
+
+#prev {
+    grid-area: prev;
+}
+#current {
+    grid-area: current;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #DDD;
+
+    span {
+        padding: 0 5px;
+    }
+}
+#next {
+    grid-area: next;
+}
+#calendar {
+    grid-area: calendar;
+    padding-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+.year {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 15px;
+
+    .month {
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        gap: 2px;
+
+        &:hover {
+            li {
+                background-color: seagreen !important;
+            }
+        }
+
+        li {
+            background-color: lightseagreen;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 1px;
+            color: #FFF;
+
+            &.past {
+                background-color: steelblue;
+            }
+
+            &:hover {
+                background-color: seagreen;
+                margin: 0px;
+            }
+
+            &:empty {
+                background-color: transparent !important;
+                cursor: default !important;
+            }
+        }
+    }
+}
