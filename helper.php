@@ -15,8 +15,8 @@ function getFMonth($sMonth) {
     $oDate = new DateTime($sMonth);
     $oDate->modify("first day of this month");
 
-    $sClass = strtolower($oDate->format("M"));
-    $sReturn = "<ul class='month' data-month='{$sClass}'>";
+    $sDataMonth = $oDate->format("F");
+    $sReturn = "<ul class='month' data-month='{$sDataMonth}'>";
     $sReturn .= str_repeat("<li></li>", $oDate->format("N") - 1);
 
     for ($iDay = 1; $iDay <= $oDate->format("t"); $iDay++) {

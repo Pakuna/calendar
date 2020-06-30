@@ -15,13 +15,15 @@
     <div id="prev" class="va-center control">
         <a href="?y=<?=$iYear-1?>" class="fa fa-arrow-left"></a>
     </div>
-    <div id="current" class="va-center">
-        <span id="cDay"></span>
-        <span id="cMonth">Juni</span>
-        <span id="cYear"><?=$iYear?></span>
-    </div>
     <div id="next" class="va-center control">
         <a href="?y=<?=$iYear+1?>" class="fa fa-arrow-right"></a>
+    </div>
+    <div id="current" class="va-center">
+        <span id="cMonth"></span>
+        <span id="cYear"><?=$iYear?></span>
+    </div>
+    <div id="close" class="va-center control">
+        <a href="?y=<?=$iYear?>" class="fa fa-close"></a>
     </div>
 
     <ul id="calendar" class="year">

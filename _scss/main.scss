@@ -7,11 +7,11 @@ body {
     max-width: 1200px;
     width: 100%;
     display: grid;
-    grid-template-columns: auto 70px 70px;
+    grid-template-columns: 70px 70px auto 70px;
     grid-template-rows: 90px auto;
     grid-template-areas:
-      "current prev next"
-      "calendar calendar calendar";
+      "prev next current close"
+      "calendar calendar calendar calendar";
 }
 a {
     color: #DDD;
@@ -44,19 +44,24 @@ a {
 #prev {
     grid-area: prev;
 }
+#next {
+    grid-area: next;
+}
 #current {
     grid-area: current;
     text-align: center;
     font-weight: bold;
     font-size: 2rem;
     color: #DDD;
+    padding-right: 70px;
 
     span {
         padding: 0 5px;
     }
 }
-#next {
-    grid-area: next;
+#close {
+    grid-area: close;
+    display: none;
 }
 #calendar {
     grid-area: calendar;
@@ -67,18 +72,24 @@ ul {
     list-style: none;
 }
 
-.year {
+#calendar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 15px;
 
-    .month {
+    &.month ul:not(.active) {
+        display: none;
+    }
+
+    &.year ul.month,
+    &.month ul.active {
         height: 100%;
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         grid-template-rows: repeat(6, 1fr);
         gap: 2px;
+        cursor: pointer;
 
         &:hover {
             li {
@@ -102,7 +113,6 @@ ul {
 
             &:hover {
                 background-color: seagreen;
-                margin: 0px;
             }
 
             &:empty {
