@@ -61,7 +61,6 @@ a {
 }
 #close {
     grid-area: close;
-    display: none;
 }
 #calendar {
     grid-area: calendar;
@@ -72,53 +71,66 @@ ul {
     list-style: none;
 }
 
-#calendar {
+.year,
+.month {
     display: grid;
+    height: 100%;
+}
+
+.year {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 15px;
+}
 
-    &.month ul:not(.active) {
-        display: none;
+.month {
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 5px;
+
+    li {
+        background-color: lightseagreen;
+        border-radius: 3px;
+        display: flex;
+        cursor: pointer;
+        margin: 1px;
+        color: #FFF;
+        padding: 10px;
+
+        &.today {
+            background-color: yellowgreen;
+        }
+
+        &.past {
+            background-color: steelblue;
+        }
+
+        &:hover {
+            background-color: seagreen;
+        }
+
+        &:empty {
+            background-color: transparent !important;
+            cursor: default !important;
+        }
     }
+}
 
-    &.year ul.month,
-    &.month ul.active {
-        height: 100%;
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-template-rows: repeat(6, 1fr);
+#calendar {
+    .year ul.month {
         gap: 2px;
         cursor: pointer;
 
         &:hover {
             li {
-                background-color: seagreen !important;
+                background-color: seagreen;
             }
         }
 
         li {
-            background-color: lightseagreen;
-            border-radius: 3px;
-            display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            margin: 1px;
-            color: #FFF;
-
-            &.past {
-                background-color: steelblue;
-            }
-
-            &:hover {
-                background-color: seagreen;
-            }
-
-            &:empty {
-                background-color: transparent !important;
-                cursor: default !important;
-            }
+            padding: 0px;
         }
     }
 }

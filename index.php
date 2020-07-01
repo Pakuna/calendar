@@ -1,4 +1,4 @@
-<?php require_once "helper.php"; $iYear = $_GET["y"] ?? date("Y"); ?>
+<?php require_once "helper.php"; ?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -13,22 +13,25 @@
 </head>
 <body>
     <div id="prev" class="va-center control">
-        <a href="?y=<?=$iYear-1?>" class="fa fa-arrow-left"></a>
+        <a href="<?=getPrevLink()?>" class="fa fa-arrow-left"></a>
     </div>
     <div id="next" class="va-center control">
-        <a href="?y=<?=$iYear+1?>" class="fa fa-arrow-right"></a>
+        <a href="<?=getNextLink()?>" class="fa fa-arrow-right"></a>
     </div>
     <div id="current" class="va-center">
-        <span id="cMonth"></span>
+        <span id="cMonth"><?=$sMonthName?></span>
         <span id="cYear"><?=$iYear?></span>
     </div>
-    <div id="close" class="va-center control">
+    <div id="close" class="va-center control" <?php if (!$iMonth): ?>style="display:none"<?php endif; ?>>
         <a href="?y=<?=$iYear?>" class="fa fa-close"></a>
     </div>
 
-    <ul id="calendar" class="year">
-        <?=getFYear($iYear)?>
-    </ul>
+    <div id="calendar">
+    <?php
+        if ($iMonth) echo getFMonth(getMonthString($iYear, $iMonth));
+        else echo getFYear($iYear);
+    ?>
+    </div>
     <script src="js/main.js"></script>
 </body>
 </html>

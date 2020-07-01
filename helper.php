@@ -1,13 +1,26 @@
 <?php
 
-function getFYear($sYear) {
-    $sReturn = "";
+$iYear = (int) ($_GET["y"] ?? date("Y"));
+$iMonth = @$_GET["m"];
+$sMonthName = "";
+
+if ($iMonth) {
+    $oActiveDate = DateTime::createFromFormat("Y-m", $iYear . "-" . $iMonth);
+    $sMonthName = $oActiveDate->format("F");
+}
+
+function getMonthString($iYear, $iMonth) {
+    return $iYear . "-" . str_pad($iMonth, 2, "0", STR_PAD_LEFT);
+}
+
+function getFYear($iYear) {
+    $sReturn = "<ul class='year'>";
     for ($iMonth = 1; $iMonth <= 12; $iMonth++) {
-        $sReturn .= "<li>";
-        $sReturn .= getFMonth($sYear . "-" . str_pad($iMonth, 2, "0", STR_PAD_LEFT));
+        $sReturn .= "<li onclick='return openMonth({$iYear}, {$iMonth})'>";
+        $sReturn .= getFMonth(getMonthString($iYear, $iMonth));
         $sReturn .= "</li>";
     }
-    return $sReturn;
+    return $sReturn . "</ul>";
 }
 
 function getFMonth($sMonth) {
@@ -21,11 +34,41 @@ function getFMonth($sMonth) {
 
     for ($iDay = 1; $iDay <= $oDate->format("t"); $iDay++) {
         $sDay = str_pad($iDay, 2, "0", STR_PAD_LEFT);
-        $sPast = $sMonth . "-" . $sDay < date("Y-m-d") ? "past" : "";
-        $sReturn .= "<li class='{$sPast}'>{$iDay}</li>";
+        $sDate = $sMonth . "-" . $sDay;
+
+        $sPast = $sDate < date("Y-m-d") ? "past" : "";
+        $sToday = $sDate == date("Y-m-d") ? "today" : "";
+
+        $sReturn .= "<li class='{$sPast} {$sToday}'>{$iDay}</li>";
     }
 
     $sReturn .= "</ul>";
 
     return $sReturn;
+}
+
+function getPrevLink() {
+    global $iYear, $iMonth;
+
+    if ($iMonth) {
+        global $oActiveDate;
+        $oDate = clone $oActiveDate;
+        $oDate->modify("-1 month");
+        return "?y=" . $oDate->format("Y") . "&m=" . $oDate->format("n");
+    }
+
+    return "?y=" . ($iYear - 1);
+}
+
+function getNextLink() {
+    global $iYear, $iMonth;
+
+    if ($iMonth) {
+        global $oActiveDate;
+        $oDate = clone $oActiveDate;
+        $oDate->modify("+1 month");
+        return "?y=" . $oDate->format("Y") . "&m=" . $oDate->format("n");
+    }
+
+    return "?y=" . ($iYear + 1);
 }
